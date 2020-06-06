@@ -10,6 +10,10 @@ laravAdmin
 ## init db
 php artisan migrate:fresh --seed
 
+
+# config mail
+-> .env
+
 # Ressources on web
 - https://laravel.com/docs
 - http://laravel.sillo.org/
