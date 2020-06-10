@@ -15,5 +15,10 @@ class UserSeeder extends Seeder
             'email' => 'administrator@localhost',
             'password' => Hash::make('password'),
         ]);
+        DB::table('users')->insertOrIgnore([
+            'name' => 'user1',
+            'email' => 'user1@localhost',
+            'password' => Hash::make('password'),
+        ]);
     }
 }

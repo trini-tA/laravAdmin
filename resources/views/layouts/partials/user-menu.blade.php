@@ -28,7 +28,7 @@
       </li>
       <!-- Menu Footer-->
       <li class="user-footer">
-        <a href="{{ route( 'admin' )}} " class="btn btn-default btn-flat">{{ __('Profile') }}</a>
+        <a href="{{ route( 'user.edit', ['user' => Auth::user()->id ] )}} " class="btn btn-default btn-flat">{{ __('Profile') }}</a>
         <a class="btn btn-default btn-flat float-right" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>

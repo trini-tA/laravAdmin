@@ -14,13 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes(['register' => false]);
 
-Route::get('/', 'AdminController@index')->name('admin');
-Route::get('/admin', 'AdminController@index')->name('admin');
+Route::middleware(['web', 'auth'])->group(function () {
 
+    Route::get('/', 'AdminController@index')->name('admin');
+    Route::get('/admin', 'AdminController@index')->name('admin');
+    
+    Route::namespace('Admin')->group(function () {
+        Route::resource( 'user', 'UserController' );
+    });
 
-
-
-Route::get('/adminlte', function () {
-    return view('adminlte');
+    //test
+    Route::get('/admin/user', function () {
+        return view('admin.user.edit');
+    });
 });
 
