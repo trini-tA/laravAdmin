@@ -62398,6 +62398,8 @@ __webpack_require__(/*! @fortawesome/fontawesome-free/js/all */ "./node_modules/
 
 __webpack_require__(/*! ./user */ "./resources/js/user.js");
 
+__webpack_require__(/*! ./logs */ "./resources/js/logs.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -62460,6 +62462,36 @@ __webpack_require__(/*! datatables.net-select-bs4 */ "./node_modules/datatables.
 
 $(document).ready(function () {
   $('.common-datatable').DataTable();
+});
+
+/***/ }),
+
+/***/ "./resources/js/logs.js":
+/*!******************************!*\
+  !*** ./resources/js/logs.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.table-container tr').on('click', function () {
+    $('#' + $(this).data('display')).toggle();
+  });
+  $('#table-log').DataTable({
+    "order": [$('#table-log').data('orderingIndex'), 'desc'],
+    "stateSave": true,
+    "stateSaveCallback": function stateSaveCallback(settings, data) {
+      window.localStorage.setItem("datatable", JSON.stringify(data));
+    },
+    "stateLoadCallback": function stateLoadCallback(settings) {
+      var data = JSON.parse(window.localStorage.getItem("datatable"));
+      if (data) data.start = 0;
+      return data;
+    }
+  });
+  $('#delete-log, #clean-log, #delete-all-log').click(function () {
+    return confirm('Are you sure?');
+  });
 });
 
 /***/ }),

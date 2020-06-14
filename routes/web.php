@@ -22,10 +22,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::namespace('Admin')->group(function () {
         Route::resource( 'user', 'UserController' );
     });
+    Route::get('/admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
 
-    //test
-    Route::get('/admin/user', function () {
-        return view('admin.user.edit');
-    });
+    
 });
 

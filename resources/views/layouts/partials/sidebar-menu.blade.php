@@ -10,7 +10,7 @@
           <x-menu-item href="{{ route( 'user.index') }}" :sub=true :active=false>
             {{ __( 'Users list' ) }}
           </x-menu-item>
-          <x-menu-item href="#" :sub=true :active=false>
+          {{--<x-menu-item href="#" :sub=true :active=false>
             {{ __( 'Roles' ) }}
           </x-menu-item>
           <x-menu-item href="#" :sub=true :active=false>
@@ -18,11 +18,11 @@
           </x-menu-item>
           <x-menu-item href="#" :sub=true :active=false>
             {{ __( 'ACL' ) }}
-          </x-menu-item>
+          </x-menu-item>--}}
         </ul>
       </li>
-      <x-menu-item href="#" icon="shopping-basket" :active=false>
-        {{ __( 'Watchdog' ) }}
+      <x-menu-item href="{{ route( 'logs.index') }}" icon="fa fa-fw fa-bug" :active=false>
+        {{ __( 'Logs' ) }}
       </x-menu-item>
       
     </ul>
