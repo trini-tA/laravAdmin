@@ -4,6 +4,7 @@
     <form action="{{ $user? route('user.update', ['user' => $user->id ]): route( 'user.store') }}" method="POST">
         @csrf
         @method( $user? 'PUT' : 'POST' )
+       
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -13,7 +14,12 @@
                 </ul>
             </div>
         @endif
-
+        @if( isset($success) )
+            <div class="alert alert-success">
+                {{ $success }}
+            </div>
+        @endif
+        
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-primary">

@@ -25,7 +25,9 @@ class UserRepository{
     }
  
     public function update(User $user, Array $inputs){
-        $inputs['password'] = bcrypt($inputs['password']);
+        if( isset( $inputs['password']) ){
+            $inputs['password'] = bcrypt($inputs['password']);
+        }
         $user->update($inputs);
 
     }

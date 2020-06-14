@@ -19,10 +19,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/admin', 'AdminController@index')->name('admin');
     
-    Route::namespace('Admin')->group(function () {
+    Route::namespace('Admin')->prefix('admin')->group(function () {
         Route::resource( 'user', 'UserController' );
+        Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
+        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
     });
-    Route::get('/admin/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
 
     
 });

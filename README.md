@@ -15,9 +15,11 @@ php artisan migrate:fresh --seed
 -> .env
 
 # Ressources on web
-- https://laravel.com/docs
-- http://laravel.sillo.org/
+    - https://laravel.com/docs
+    - http://laravel.sillo.org/
 
 # Tools & Addoons
-- https://github.com/barryvdh/laravel-debugbar
-- 
+    - https://github.com/barryvdh/laravel-debugbar
+    - https://github.com/rap2hpoutre/laravel-log-viewer
+    - https://github.com/spatie/laravel-activitylog
+    - https://github.com/santigarcor/laratrust
