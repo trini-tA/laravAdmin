@@ -1,9 +1,9 @@
 @extends('layouts.adminlte')
 
 @section('main')
-    <form action="{{ route('user.update', ['user' => $user->id ]) }}" method="POST">
+    <form action="{{ $user? route('user.update', ['user' => $user->id ]): route( 'user.store') }}" method="POST">
         @csrf
-        @method('PUT')
+        @method( $user? 'PUT' : 'POST' )
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -27,11 +27,11 @@
                     <div class="card-body">
                     <div class="form-group">
                         <label for="name">{{ __('name') }}</label>
-                        <input type="text" id="name" name="name" class="form-control" value="{{ old( 'name', $user->name )}}" required>
+                        <input type="text" id="name" name="name" class="form-control" value="{{ old( 'name', $user? $user->name: '' )}}" required>
                     </div>
                     <div class="form-group">
                         <label for="email">{{ __('email') }}</label>
-                        <input type="email" id="email" name="email" class="form-control" value="{{ old( 'email', $user->email )}}" readonly required>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ old( 'email',  $user? $user->email: '' )}}" {{ $user? 'readonly': '' }} required>
                     </div>
                     
                     <div class="form-group">
@@ -50,15 +50,16 @@
             <div class="col-md-6">
                 <div class="card card-secondary">
                     <div class="card-header">
-                    <h3 class="card-title">{{ __('Role & Permissions') }}</h3>
+                        <h3 class="card-title">{{ __('Role & Permissions') }}</h3>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-            <a href="{{ url()->previous() }}" class="btn btn-secondary">{{ __('cancel') }}</a>
-            <input type="submit" value="{{ __('Save') }}" class="btn btn-success float-right">
+
+            <div class="col-12 mb-2">
+                <a href="{{ route( 'user.index' ) }}" class="btn btn-secondary">{{ __('cancel') }}</a>
+                <input type="submit" value="{{ $user? __('Save'): __('Create') }}" class="btn btn-success float-right">
             </div>
         </div>
+
     </form>       
 @endsection

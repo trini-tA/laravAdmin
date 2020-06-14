@@ -1,6 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('main')
+    <a class="btn btn-primary btn-add-user" href="{{ route( 'user.create' ) }}">{{ __('New user') }}</a>
     <table id="users-list" class="common-datatable table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
@@ -13,7 +14,7 @@
         </thead>
         <tbody>
             @foreach( $users as $user )
-                <tr>
+                <tr >
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>

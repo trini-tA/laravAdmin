@@ -26,9 +26,8 @@ class UserController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('admin.user.edit', [ 'user' => null] );
     }
 
     /**
@@ -37,9 +36,18 @@ class UserController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required_with:min:6|required:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'required_with:min:6'
+        ]);
+
+        $user = $this->users->store( $request->all() );
+        
+        return view('admin.user.edit', [ 'user' => $user] )->with( 'success', __('success user created'));
     }
 
     /**
@@ -98,8 +106,7 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        $this->users->destroy( $this->users->find($id) );
     }
 }

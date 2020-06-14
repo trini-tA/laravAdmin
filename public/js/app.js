@@ -62392,11 +62392,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./datatable */ "./resources/js/datatable.js");
 
-__webpack_require__(/*! ./confirm */ "./resources/js/confirm.js");
-
 __webpack_require__(/*! admin-lte */ "./node_modules/admin-lte/dist/js/adminlte.min.js");
 
 __webpack_require__(/*! @fortawesome/fontawesome-free/js/all */ "./node_modules/@fortawesome/fontawesome-free/js/all.js");
+
+__webpack_require__(/*! ./user */ "./resources/js/user.js");
 
 /***/ }),
 
@@ -62445,10 +62445,29 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/confirm.js":
-/*!*********************************!*\
-  !*** ./resources/js/confirm.js ***!
-  \*********************************/
+/***/ "./resources/js/datatable.js":
+/*!***********************************!*\
+  !*** ./resources/js/datatable.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
+
+__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
+
+__webpack_require__(/*! datatables.net-select-bs4 */ "./node_modules/datatables.net-select-bs4/js/select.bootstrap4.js");
+
+$(document).ready(function () {
+  $('.common-datatable').DataTable();
+});
+
+/***/ }),
+
+/***/ "./resources/js/user.js":
+/*!******************************!*\
+  !*** ./resources/js/user.js ***!
+  \******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -62492,25 +62511,40 @@ $(document).ready(function () {
     });
     ;
   });
-});
-
-/***/ }),
-
-/***/ "./resources/js/datatable.js":
-/*!***********************************!*\
-  !*** ./resources/js/datatable.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
-
-__webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
-
-__webpack_require__(/*! datatables.net-select-bs4 */ "./node_modules/datatables.net-select-bs4/js/select.bootstrap4.js");
-
-$(document).ready(function () {
-  $('.common-datatable').DataTable();
+  $('.btn-delete-user').on('click', function (e) {
+    e.preventDefault();
+    var button = this;
+    alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.confirm("Confirm", "Do you want delete this user?", function () {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        url: $(button).attr('data-href'),
+        type: 'DELETE',
+        //data: {email:  $(button).attr( 'data-email') },
+        //dataType: 'JSON',
+        success: function success(data) {
+          alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.success('User deleted !');
+          var userTable = $('.common-datatable').DataTable();
+          userTable.row($(button).parents('tr')).remove().draw();
+        },
+        error: function error(e) {
+          alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.error(e.responseJSON.message);
+        }
+      });
+    }, function () {//alertify.error('Cancel');
+    }).set('reverseButtons', true).set('labels', {
+      ok: 'Delete',
+      cancel: 'Cancel'
+    });
+    ;
+  });
+  /*$('.btn-add-user').on( 'click', function(e){
+      const userTable = $('.common-datatable').DataTable();
+      userTable.row.add( '' ).draw();
+  })*/
 });
 
 /***/ }),
