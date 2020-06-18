@@ -39583,3 +39583,7 @@ a.text-muted:hover {
   color: #ffffff;
 }
 
+.common-datatable td {
+  vertical-align: middle !important;
+}
+

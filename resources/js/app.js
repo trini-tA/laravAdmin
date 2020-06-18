@@ -6,5 +6,6 @@ require('@fortawesome/fontawesome-free/js/all');
 
 require('./user');
 require('./logs');
+require('./laratrust');
 
 

@@ -62400,6 +62400,8 @@ __webpack_require__(/*! ./user */ "./resources/js/user.js");
 
 __webpack_require__(/*! ./logs */ "./resources/js/logs.js");
 
+__webpack_require__(/*! ./laratrust */ "./resources/js/laratrust.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -62462,6 +62464,63 @@ __webpack_require__(/*! datatables.net-select-bs4 */ "./node_modules/datatables.
 
 $(document).ready(function () {
   $('.common-datatable').DataTable();
+});
+
+/***/ }),
+
+/***/ "./resources/js/laratrust.js":
+/*!***********************************!*\
+  !*** ./resources/js/laratrust.js ***!
+  \***********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var alertifyjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alertifyjs */ "./node_modules/alertifyjs/build/alertify.js");
+/* harmony import */ var alertifyjs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(alertifyjs__WEBPACK_IMPORTED_MODULE_0__);
+
+$(document).ready(function () {
+  alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.transition = "slide";
+  alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.theme.ok = "btn btn-primary";
+  alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.theme.cancel = "btn btn-danger";
+  alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.theme.input = "form-control";
+  $('.btn-delete-laratrust').on('click', function (e) {
+    e.preventDefault();
+    var button = this;
+    alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.confirm("Confirm", "Do you want delete this " + $(button).attr('data-type') + "?", function () {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+      $.ajax({
+        url: $(button).attr('data-href'),
+        type: 'DELETE',
+        //data: {email:  $(button).attr( 'data-email') },
+        //dataType: 'JSON',
+        success: function success(data) {
+          alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.success($(button).attr('data-type') + ' deleted !');
+
+          var _datatable = $('#' + $(button).attr('data-type') + '-list').DataTable();
+
+          _datatable.row($(button).parents('tr')).remove().draw();
+        },
+        error: function error(e) {
+          alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.error(e.responseJSON.message);
+        }
+      });
+    }, function () {//alertify.error('Cancel');
+    }).set('reverseButtons', true).set('labels', {
+      ok: 'Delete',
+      cancel: 'Cancel'
+    });
+    ;
+  });
+  /*$('.btn-add-user').on( 'click', function(e){
+      const userTable = $('.common-datatable').DataTable();
+      userTable.row.add( '' ).draw();
+  })*/
 });
 
 /***/ }),
@@ -62559,7 +62618,7 @@ $(document).ready(function () {
         //dataType: 'JSON',
         success: function success(data) {
           alertifyjs__WEBPACK_IMPORTED_MODULE_0___default.a.success('User deleted !');
-          var userTable = $('.common-datatable').DataTable();
+          var userTable = $('#users-list').DataTable();
           userTable.row($(button).parents('tr')).remove().draw();
         },
         error: function error(e) {

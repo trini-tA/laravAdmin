@@ -8,6 +8,7 @@
                 <th>{{ __('id') }}</th>
                 <th>{{ __('name') }}</th>
                 <th>{{ __('email') }}</th>
+                <th>{{ __('roles') }}</th>
                 <th>{{ __('updated_at') }}</th>
                 <th>{{ __('actions') }}</th>
             </tr>
@@ -18,12 +19,25 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        <ul>
+                            @foreach( $user->roles as $role )
+                                <li>{{ $role->display_name }}</li>
+                            @endforeach
+                        </ul>
+                    </td>
                     <td>{{ $user->updated_at }}</td>
                     <td>
                         <div class="float-right">
-                            <button class="btn btn-primary btn-reset-user" data-href="{{ route( 'password.email') }}" data-email="{{ $user->email }}" >{{ __('reset email') }}</button>
-                            <a class="btn btn-primary" href="{{ route( 'user.edit', ['user' => $user->id]) }}">{{ __('edit') }}</a>
-                            <button class="btn btn-danger btn-delete-user" data-href="{{ route( 'user.destroy', ['user' => $user->id ]) }}" data-user-id="{{ $user->id }}">{{ __('delete') }}</button>
+                            <button class="btn btn-primary btn-sm btn-reset-user" data-href="{{ route( 'password.email') }}" data-email="{{ $user->email }}">
+                                <i class="fas fa-folder"></i>&nbsp;{{ __('Reset email') }}
+                            </button>
+                            <a class="btn btn-info btn-sm" href="{{ route( 'user.edit', ['user' => $user->id]) }}">
+                                <i class="fas fa-pencil-alt"></i>&nbsp;{{ __('edit') }}
+                            </a>
+                            <button class="btn btn-danger btn-sm btn-delete-user" data-href="{{ route( 'user.destroy', ['user' => $user->id ]) }}" data-user-id="{{ $user->id }}">
+                                <i class="fas fa-trash"></i>&nbsp;{{ __('delete') }}
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -34,6 +48,7 @@
                 <th>{{ __('id') }}</th>
                 <th>{{ __('name') }}</th>
                 <th>{{ __('email') }}</th>
+                <th>{{ __('roles') }}</th>
                 <th>{{ __('updated_at') }}</th>
                 <th>{{ __('actions') }}</th>
             </tr>

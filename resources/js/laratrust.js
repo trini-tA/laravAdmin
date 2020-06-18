@@ -6,44 +6,12 @@ $( document ).ready(function() {
     alertify.defaults.theme.cancel = "btn btn-danger";
     alertify.defaults.theme.input = "form-control";
 
-    $('.btn-reset-user').on( 'click', function(e){
+    
+    $('.btn-delete-laratrust').on( 'click', function(e){
         e.preventDefault();
         const button =  this;
 
-        alertify.confirm( "Confirm", "Send email to reset password ?", function( ){
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-          
-            $.ajax({
-                url: $(button).attr( 'data-href'),
-                type: 'POST',
-                data: {email:  $(button).attr( 'data-email') },
-                dataType: 'JSON',
-                success: function (data) {
-                    alertify.success( 'Email send !' );
-          
-                },
-                error: function (e) {
-                    alertify.error( e.responseJSON.message );
-                }
-            });
-        },
-        function(){
-            //alertify.error('Cancel');
-        })
-        .set('reverseButtons', true)
-        .set('labels', { ok: 'Send', cancel: 'Cancel' });;
-    })
-
-    $('.btn-delete-user').on( 'click', function(e){
-        e.preventDefault();
-        const button =  this;
-
-        alertify.confirm( "Confirm", "Do you want delete this user?", function( ){
+        alertify.confirm( "Confirm", "Do you want delete this " + $(button).attr( 'data-type') + "?", function( ){
 
             $.ajaxSetup({
                 headers: {
@@ -57,9 +25,9 @@ $( document ).ready(function() {
                 //data: {email:  $(button).attr( 'data-email') },
                 //dataType: 'JSON',
                 success: function (data) {
-                    alertify.success( 'User deleted !' );
-                    const userTable = $('#users-list').DataTable();
-                    userTable.row( $(button).parents('tr') )
+                    alertify.success( $(button).attr( 'data-type' ) + ' deleted !' );
+                    const _datatable = $('#' + $(button).attr( 'data-type') + '-list' ).DataTable();
+                    _datatable.row( $(button).parents('tr') )
                         .remove()
                         .draw();
                     

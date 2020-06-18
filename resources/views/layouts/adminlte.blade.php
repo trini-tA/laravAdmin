@@ -19,14 +19,18 @@
                       <h1>{{ __( Route::currentRouteName() ) }}</h1>
                     </div>
                     <div class="col-sm-6">
+                      
+                      {{-- breadcrumb --}}
                       <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{ url('/') }}">{{ _('Home') }}</a></li>
                         <li class="breadcrumb-item active">{{ __( Route::currentRouteName() ) }}</li>
                       </ol>
+                      {{-- breadcrumb --}}
+
                     </div>
                   </div>
                 </div>
-              </section>
+            </section>
 
            
 

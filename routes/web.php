@@ -20,9 +20,19 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/admin', 'AdminController@index')->name('admin');
     
     Route::namespace('Admin')->prefix('admin')->group(function () {
-        Route::resource( 'user', 'UserController' );
-        Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
-        Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
+
+        
+        Route::group(['middleware' => ['role:superadministrator']], function() {
+            Route::resource( 'user', 'UserController' );
+            Route::resource( 'role', 'RoleController' );
+            Route::resource( 'permission', 'PermissionController' );
+       
+
+            Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
+            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
+
+        });
+
         Route::get( 'contact', function(){
             return view( 'admin.contact');
         })->name( 'contact.index' );

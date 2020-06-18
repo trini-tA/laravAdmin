@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
+use App\Repositories\RoleRepository;
 
 class UserController extends Controller{
     protected $users;
 
-    public function __construct(UserRepository $users){
+    public function __construct(UserRepository $users, RoleRepository $roles){
         $this->users = $users;
+        $this->roles = $roles;
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +29,7 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('admin.user.edit', [ 'user' => null] );
+        return view('admin.user.edit', [ 'user' => null, 'roles' => $this->roles->all() ] );
     }
 
     /**
@@ -47,7 +49,7 @@ class UserController extends Controller{
 
         $user = $this->users->store( $request->all() );
         
-        return view('admin.user.edit', [ 'user' => $user] )->with( 'success', __('success user created'));
+        return view('admin.user.edit', [ 'user' => $user, 'roles' => $this->roles->all() ] )->with( 'success', __('success user created'));
     }
 
     /**
@@ -70,7 +72,7 @@ class UserController extends Controller{
     public function edit($id){
         
         $user = $this->users->find($id);
-        return view('admin.user.edit', [ 'user' => $user] );
+        return view('admin.user.edit', [ 'user' => $user, 'roles' => $this->roles->all() ] );
     }
 
     /**
@@ -96,7 +98,7 @@ class UserController extends Controller{
             $this->users->update( $user, $request->all() );
         }
         
-        return view('admin.user.edit', [ 'user' => $user] )->with( 'success', __('success user saved'));
+        return view('admin.user.edit', [ 'user' => $this->users->find($id), 'roles' => $this->roles->all() ] )->with( 'success', __('success user saved'));
 
     }
 
