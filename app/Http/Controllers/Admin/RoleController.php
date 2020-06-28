@@ -108,4 +108,5 @@ class RoleController extends Controller{
             abort( 405 );
         }
     }
+
 }

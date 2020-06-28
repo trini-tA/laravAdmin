@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 use App\Role;
-use App\Repositories\UserRepository;
+use App\Permission;
 
 class RoleRepository{
     protected $role;
@@ -30,5 +30,16 @@ class RoleRepository{
     public function destroy(Role $role ){
         $role->delete();
 
+    }
+
+    public function assignment( $inputPermissions ){
+        foreach( $inputPermissions as $role => $permissions ) {
+            $role = $this->role->find( $role );
+            $role->detachPermissions();
+            foreach( $permissions as $id => $checked ){
+                $role->attachPermission( Permission::where( 'id', $id )->first()->name );
+            }
+
+        }
     }
 }

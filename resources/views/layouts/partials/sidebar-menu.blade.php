@@ -18,10 +18,9 @@
             <x-menu-item href="{{ route( 'permission.index') }}" :sub=true :active=false>
               {{ __( 'Permissions' ) }}
             </x-menu-item>
-            {{--
-            <x-menu-item href="#" :sub=true :active=false>
-              {{ __( 'ACL' ) }}
-            </x-menu-item>--}}
+            <x-menu-item href="{{ route( 'assignment.index') }}" :sub=true :active=false>
+              {{ __( 'assignment' ) }}
+            </x-menu-item>
           </ul>
         @endrole
 

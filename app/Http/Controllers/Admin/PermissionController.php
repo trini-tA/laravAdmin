@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\PermissionRepository;;
+use App\Repositories\RoleRepository;
 
 class PermissionController extends Controller{
+    protected $roles;
     protected $permissions;
 
-    public function __construct( permissionRepository $permissions){
+    public function __construct( permissionRepository $permissions, RoleRepository $roles ){
         $this->permissions = $permissions;
+        $this->roles = $roles;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -101,5 +105,25 @@ class PermissionController extends Controller{
      */
     public function destroy($id){
         $this->permissions->destroy( $this->permissions->find($id) );
+    }
+
+    public function assignment( Request $request ){
+
+        // default 
+        return view('admin.permission.assignment', [ 'permissions' => $this->permissions->all(), 'roles' => $this->roles->all() ] );
+
+    }
+
+    public function assignmentStore( Request $request ){
+
+        if( $request->permissions ){
+
+            $this->roles->assignment( $request->permissions );
+            
+        }
+        return view('admin.permission.assignment', [ 'permissions' => $this->permissions->all(), 'roles' => $this->roles->all() ] )
+            ->with( 'success', __('success assignment saved'));
+
+
     }
 }

@@ -22,11 +22,13 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::namespace('Admin')->prefix('admin')->group(function () {
 
         
+        //TODO:: change restriction 
         Route::group(['middleware' => ['role:superadministrator']], function() {
             Route::resource( 'user', 'UserController' );
             Route::resource( 'role', 'RoleController' );
             Route::resource( 'permission', 'PermissionController' );
-       
+            Route::get( 'assignment', 'PermissionController@assignment' )->name( 'assignment.index' );
+            Route::post( 'assignment', 'PermissionController@assignmentStore' )->name( 'assignment.store' );
 
             Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
             Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
