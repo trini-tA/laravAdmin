@@ -1,9 +1,9 @@
 @extends('layouts.adminlte')
 
 @section('main')
-    <form action="{{ $user? route('user.update', ['user' => $user->id ]): route( 'user.store') }}" method="POST">
+    <form action="{{ route('profile.update', ['profile' => $user->id ]) }}" method="POST">
         @csrf
-        @method( $user? 'PUT' : 'POST' )
+        @method( 'PUT' )
        
         @if ($errors->any())
             <div class="alert alert-danger">

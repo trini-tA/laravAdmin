@@ -19,27 +19,33 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/', 'AdminController@index')->name('admin');
     Route::get('/admin', 'AdminController@index')->name('admin');
     
-    Route::namespace('Admin')->prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
 
-        
-        //TODO:: change restriction 
-        Route::group(['middleware' => ['role:superadministrator']], function() {
-            Route::resource( 'user', 'UserController' );
-            Route::resource( 'role', 'RoleController' );
-            Route::resource( 'permission', 'PermissionController' );
-            Route::get( 'assignment', 'PermissionController@assignment' )->name( 'assignment.index' );
-            Route::post( 'assignment', 'PermissionController@assignmentStore' )->name( 'assignment.store' );
-
-            Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
-            Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
-
+        Route::namespace('BackOffice')->group(function () {
+            Route::group(['middleware' => 'permission:edit-profile'], function() {
+                Route::resource('profile', 'ProfileController', ['only' => ['edit', 'update']]);
+            });
         });
 
-        Route::get( 'contact', function(){
-            return view( 'admin.contact');
-        })->name( 'contact.index' );
-    });
+        Route::namespace('Admin')->group(function () {
+            //TODO:: change restriction 
+            Route::group(['middleware' => ['role:superadministrator']], function() {
+                Route::resource( 'user', 'UserController' );
+                Route::resource( 'role', 'RoleController' );
+                Route::resource( 'permission', 'PermissionController' );
+                Route::get( 'assignment', 'PermissionController@assignment' )->name( 'assignment.index' );
+                Route::post( 'assignment', 'PermissionController@assignmentStore' )->name( 'assignment.store' );
 
-    
+                Route::get( 'activity-logs', 'ActivityLogController@index' )->name('activity_log.index');
+                Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs.index');
+
+            });
+
+            Route::get( 'contact', function(){
+                return view( 'admin.contact');
+            })->name( 'contact.index' );
+        });
+    });
+   
 });
 

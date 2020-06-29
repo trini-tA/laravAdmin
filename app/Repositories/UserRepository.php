@@ -31,13 +31,13 @@ class UserRepository{
         return $user;
     }
  
-    public function update(User $user, Array $inputs){
+    public function update(User $user, Array $inputs, $updateRole = true ){
         if( isset( $inputs['password']) ){
             $inputs['password'] = bcrypt($inputs['password']);
         }
         $user->update($inputs);
 
-        if( isset( $inputs['roles'] ) ){
+        if( $updateRole && isset( $inputs['roles'] ) ){
             $user->detachRoles($user->roles);
             $user->attachRoles( array_keys( $inputs['roles'] ) );
         }

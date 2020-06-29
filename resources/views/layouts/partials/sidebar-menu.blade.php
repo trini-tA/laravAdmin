@@ -25,12 +25,14 @@
         @endrole
 
       </li>
-      <x-menu-item href="{{ route( 'logs.index') }}" icon="fa fa-fw fa-bug" :active=false>
-        {{ __( 'Logs' ) }}
-      </x-menu-item>
-      <x-menu-item href="{{ route( 'activity_log.index') }}" icon="fa fa-fw fa-bug" :active=false>
-        {{ __( 'Activity logs' ) }}
-      </x-menu-item>
+      @role( 'superadministrator' )
+        <x-menu-item href="{{ route( 'logs.index') }}" icon="fa fa-fw fa-bug" :active=false>
+          {{ __( 'Logs' ) }}
+        </x-menu-item>
+        <x-menu-item href="{{ route( 'activity_log.index') }}" icon="fa fa-fw fa-bug" :active=false>
+          {{ __( 'Activity logs' ) }}
+        </x-menu-item>
+      @endrole
       
     </ul>
   </nav>
