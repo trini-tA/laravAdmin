@@ -19,7 +19,7 @@
             {{ $success }}
         </div>
     @endif
-    <table>
+    <table class="table bordered mr-5">
         <thead>
             <tr>
                 <th class="w-50">&nbsp;</th>
@@ -32,8 +32,10 @@
             @foreach( $permissions as $permission )
                 <tr>
                     <td class="w-50 " data-id="{{ $permission->id }}" data-name="{{ $permission->name }}">
-                        {{ $permission->display_name }}
-                        <small>{{ $permission->decription }}</small>
+                        <div class="d-flex flex-column">
+                            {{ $permission->display_name }}
+                            <small>{{ $permission->description }}</small>
+                        </div>
                     </td>
                     @foreach( $roles as $role )
                         <td class="w-25 text-center" data-id="{{ $role->id }}" data-name="{{ $role->name }}">
