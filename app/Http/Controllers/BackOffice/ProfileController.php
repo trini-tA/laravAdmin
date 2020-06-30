@@ -4,7 +4,7 @@ namespace App\Http\Controllers\BackOffice;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\Update;
+use App\Http\Requests\ProfileUpdate;
 use App\Repositories\UserRepository;
 use App\Repositories\RoleRepository;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +40,12 @@ class ProfileController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Update $request, $id ){
+    public function update( ProfileUpdate $request, $id ){
         
         if( $id != Auth::user()->id ){
             abort( 403 );
         }
-        
+
         $user = $this->users->find($id);
         if( empty( $request->password )){
             $this->users->update(  $user, $request->except( 'password'), false );

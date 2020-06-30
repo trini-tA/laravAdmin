@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Auth\Guard;
 
-class Update extends FormRequest{
+class ProfileUpdate extends FormRequest{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     public function authorize( Guard $auth ){
+
         return $auth->user()->hasPermission( 'edit-profile' );
     }
 
@@ -20,8 +21,8 @@ class Update extends FormRequest{
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
+        
         return [
             'name' => 'required|max:255',
             'email' => 'required|max:255',
