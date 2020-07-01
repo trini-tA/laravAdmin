@@ -13,6 +13,10 @@ class ProfileUpdate extends FormRequest{
      */
     public function authorize( Guard $auth ){
 
+        if( $this->route('profile') != $auth->user()->id ){
+            return false;
+        }
+
         return $auth->user()->hasPermission( 'edit-profile' );
     }
 

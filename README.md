@@ -1,5 +1,7 @@
 laravAdmin
 
+An another backend with https://adminlte.io/
+
 # install
 1. composer install
 2. npm install

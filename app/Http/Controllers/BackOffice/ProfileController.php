@@ -24,12 +24,11 @@ class ProfileController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id ){
-        
-        if( $id != Auth::user()->id ){
-            abort( 403 );
-        }
+    public function edit( request $request, $id ){
         $user = $this->users->find($id);
+        
+        $this->authorize( 'edit', $user );
+
         return view('backoffice.profile.edit', [ 'user' => $user, 'roles' => $this->roles->all() ] );
     }
 
@@ -42,9 +41,6 @@ class ProfileController extends Controller{
      */
     public function update( ProfileUpdate $request, $id ){
         
-        if( $id != Auth::user()->id ){
-            abort( 403 );
-        }
 
         $user = $this->users->find($id);
         if( empty( $request->password )){
