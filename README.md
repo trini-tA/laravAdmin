@@ -1,11 +1,14 @@
 laravAdmin
 
-An another backend with https://adminlte.io/
+BackOffice laravel avec https://adminlte.io/
+Projet de formation Laravel 7.x
+
 
 # install
 1. composer install
 2. npm install
-3. php artisan migrate
+3. php artisan migrate:fresh --seed
+4. npm run dev
 
 
 
@@ -20,7 +23,7 @@ php artisan migrate:fresh --seed
     - https://laravel.com/docs
     - http://laravel.sillo.org/
 
-# Tools & Addoons
+# Tools & Addons
     - https://github.com/barryvdh/laravel-debugbar
     - https://github.com/rap2hpoutre/laravel-log-viewer
     - https://github.com/spatie/laravel-activitylog
