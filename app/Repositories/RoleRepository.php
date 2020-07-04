@@ -4,7 +4,9 @@ namespace App\Repositories;
 use App\Role;
 use App\Permission;
 
-class RoleRepository{
+use App\Repositories\Interfaces\RoleRepositoryInterface;
+
+class RoleRepository implements RoleRepositoryInterface{
     protected $role;
  
     public function __construct(Role $role){

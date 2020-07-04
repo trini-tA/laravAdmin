@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\RoleRepository;
+use App\Repositories\Interfaces\RoleRepositoryInterface;
 
 class RoleController extends Controller{
     protected $roles;
 
-    public function __construct( RoleRepository $roles){
+    public function __construct( RoleRepositoryInterface $roles){
         $this->roles = $roles;
     }
     /**

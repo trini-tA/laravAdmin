@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\RoleRepository;
+use App\Repositories\Interfaces\RoleRepositoryInterface;
 
 class UserController extends Controller{
     protected $users;
 
-    public function __construct( UserRepositoryInterface $users, RoleRepository $roles){
+    public function __construct( UserRepositoryInterface $users, RoleRepositoryInterface $roles){
         $this->users = $users;
         $this->roles = $roles;
     }

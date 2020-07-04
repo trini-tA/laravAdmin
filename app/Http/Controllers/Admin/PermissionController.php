@@ -4,14 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\PermissionRepository;;
 use App\Repositories\RoleRepository;
+use App\Repositories\Interfaces\PermissionRepositoryInterface;
 
 class PermissionController extends Controller{
     protected $roles;
     protected $permissions;
 
-    public function __construct( permissionRepository $permissions, RoleRepository $roles ){
+    public function __construct( PermissionRepositoryInterface $permissions, RoleRepository $roles ){
         $this->permissions = $permissions;
         $this->roles = $roles;
     }

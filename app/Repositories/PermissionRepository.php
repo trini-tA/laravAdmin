@@ -2,12 +2,13 @@
 
 namespace App\Repositories;
 use App\Permission;
-use App\Repositories\PermissionRepository;
 
-class PermissionRepository{
+use App\Repositories\Interfaces\PermissionRepositoryInterface;
+
+class PermissionRepository implements PermissionRepositoryInterface{
     protected $permission;
  
-    public function __construct(permission $permission){
+    public function __construct(Permission $permission){
         $this->permission = $permission;
     }
 
@@ -23,11 +24,11 @@ class PermissionRepository{
         return $this->permission->create($inputs);
     }
  
-    public function update(permission $permission, Array $inputs){
+    public function update(Permission $permission, Array $inputs){
         $permission->update($inputs);
     }
  
-    public function destroy(permission $permission ){
+    public function destroy(Permission $permission ){
         $permission->delete();
 
     }
