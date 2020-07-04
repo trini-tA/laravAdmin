@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\UserRepository;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\RoleRepository;
 
 class UserController extends Controller{
     protected $users;
 
-    public function __construct(UserRepository $users, RoleRepository $roles){
+    public function __construct( UserRepositoryInterface $users, RoleRepository $roles){
         $this->users = $users;
         $this->roles = $roles;
     }

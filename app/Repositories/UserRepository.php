@@ -4,7 +4,7 @@ namespace App\Repositories;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\User;
 
-class UserRepository{
+class UserRepository implements UserRepositoryInterface{
     protected $user;
  
     public function __construct(User $user){
