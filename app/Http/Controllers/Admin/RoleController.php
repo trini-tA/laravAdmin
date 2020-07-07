@@ -70,6 +70,7 @@ class RoleController extends Controller{
     public function edit($id){
         
         $role = $this->roles->find($id);
+        $this->authorize( 'edit', $role );
         return view('admin.role.edit', [ 'role' => $role] );
     }
 
