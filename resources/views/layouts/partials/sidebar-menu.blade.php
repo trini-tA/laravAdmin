@@ -32,6 +32,9 @@
         <x-menu-item href="{{ route( 'activity_log.index') }}" icon="fa fa-fw fa-bug" :active="currentRouteActive('activity_log.index')">
           {{ __( 'Activity logs' ) }}
         </x-menu-item>
+        <x-menu-item href="{{ route( 'notification.index') }}" icon="fa fa-fw fa-notification" :active="currentRouteActive('notification.index')">
+          {{ __( 'Notifications' ) }}
+        </x-menu-item>
       @endrole
       
     </ul>

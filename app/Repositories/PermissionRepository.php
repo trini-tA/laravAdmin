@@ -21,7 +21,9 @@ class PermissionRepository implements PermissionRepositoryInterface{
     }
 
     public function store(Array $inputs){
-        return $this->permission->create($inputs);
+        $permission = $this->permission->create($inputs);
+
+        return $permission;
     }
  
     public function update(Permission $permission, Array $inputs){

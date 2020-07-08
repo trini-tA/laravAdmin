@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\RoleRepository;
 use App\Repositories\Interfaces\PermissionRepositoryInterface;
+use App\Notifications\NewPermission;
 
 class PermissionController extends Controller{
     protected $roles;
@@ -73,6 +74,8 @@ class PermissionController extends Controller{
     public function edit($id){
         
         $permission = $this->permissions->find($id);
+
+        auth()->user()->notify( new NewPermission( $permission ) );
         return view('admin.permission.edit', [ 'permission' => $permission] );
     }
 
