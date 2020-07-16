@@ -31,6 +31,8 @@ Route::middleware(['web', 'auth'])->group(function () {
             //TODO:: change restriction 
             Route::group(['middleware' => ['role:superadministrator']], function() {
                 Route::resource( 'user', 'UserController' );
+                Route::get( '/user/token/{user}', 'UserController@token' )->name( 'user.token' );
+
                 Route::resource( 'role', 'RoleController' );
                 Route::resource( 'permission', 'PermissionController' );
                 Route::get( 'assignment', 'PermissionController@assignment' )->name( 'assignment.index' );

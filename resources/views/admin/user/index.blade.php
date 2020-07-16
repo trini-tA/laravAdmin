@@ -38,6 +38,7 @@
                             <button class="btn btn-danger btn-sm btn-delete-user" data-href="{{ route( 'user.destroy', ['user' => $user->id ]) }}" data-user-id="{{ $user->id }}">
                                 <i class="fas fa-trash"></i>&nbsp;{{ __('delete') }}
                             </button>
+                            <a class="btn btn-info btn-sm" href="{{ route( 'user.token', ['user' => $user->id] ) }}"><i class="fas fa-pencil-alt"></i>&nbsp;{{ __('token')}}</a>
                         </div>
                     </td>
                 </tr>

@@ -7,12 +7,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Laratrust\Traits\LaratrustUserTrait;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
     use LogsActivity;
+    use HasApiTokens;
     /**
      * The attributes that are mass assignable.
      *

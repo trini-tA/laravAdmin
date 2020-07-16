@@ -111,4 +111,15 @@ class UserController extends Controller{
     public function destroy($id){
         $this->users->destroy( $this->users->find($id) );
     }
+
+    public function token( $id ){
+        $user = $this->users->find($id);
+        $token = $user->createToken('token-name');
+
+        dump( $token );
+        dd( $user );
+    }
+
+    
+
 }

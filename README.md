@@ -28,3 +28,5 @@ php artisan migrate:fresh --seed
     - https://github.com/rap2hpoutre/laravel-log-viewer
     - https://github.com/spatie/laravel-activitylog
     - https://github.com/santigarcor/laratrust
+
+
