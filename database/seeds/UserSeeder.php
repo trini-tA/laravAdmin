@@ -14,11 +14,13 @@ class UserSeeder extends Seeder
             'name' => 'administrator',
             'email' => 'administrator@localhost',
             'password' => Hash::make('password'),
+            'api_token' => Str::random(80),
         ]);
         DB::table('users')->insertOrIgnore([
             'name' => 'user1',
             'email' => 'user1@localhost',
             'password' => Hash::make('password'),
+            'api_token' => Str::random(80),
         ]);
     }
 }

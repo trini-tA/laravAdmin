@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+http://laravadmin.test/api/user?api_token=A2EZwOnVipr45kJ4kICXdYmowOPwYg5C5GYG4ci1m1g3k3l87ubnuFpOmvQGR7VgP7fM28TYVnrm9OAq
+*/
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
